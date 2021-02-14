@@ -11,6 +11,8 @@ app.config.from_object(Development)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+from views import index
+
 @app.route('/')
 def index():
     return "hello world!"
