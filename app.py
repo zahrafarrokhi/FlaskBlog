@@ -13,11 +13,6 @@ migrate = Migrate(app, db)
 
 from views import index
 
-@app.route('/')
-def index():
-    return "hello world!"
-
-
 # blueprint
 from mod_admin import admin
 from mod_users import users
