@@ -27,8 +27,8 @@ def login():
         session['email'] = user.email
         session['user_id'] = user.id
         return "Logged in successfully" 
-    print(session) 
-    # <SecureCookieSession {'csrf_token': 'd36f80594222731588967b204cd4b876d5e0df38', 'email': 'zahrafarrokhi2017@gamil.com', 'name': 'Zahra', 'user_id': 1}>  
-    if session.get('email') is not None:
-        return "You are already logged in"
+#     print(session) 
+   
+#     if session.get('email') is not None:
+#         return "You are already logged in"
     return render_template('admin/login.html', form=form)
