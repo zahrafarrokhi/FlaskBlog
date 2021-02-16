@@ -1,4 +1,4 @@
-from flask import session, render_template, request, abort
+from flask import session, render_template, request, abort,flash
 from mod_users.forms import LoginForm
 from mod_users.models import User
 from . import admin
@@ -17,18 +17,16 @@ def login():
         if not form.validate_on_submit():
             abort(400)
         user = User.query.filter(User.email.ilike(f'{form.email.data}')).first()
-        # print(user)
-        # id user in db 
-        # <User 1>
+       
         if not user:
-            return "Incorrent Credentials", 400
+            flash('Incorrect Credentials', category='error')
+            return render_template('admin/login.html', form=form)
         if not user.check_password(form.password.data):
-            return "Incorrent Credentials", 400
+            flash('Incorrect Credentials', category='error')
+            return render_template('admin/login.html', form=form)
         session['email'] = user.email
         session['user_id'] = user.id
         return "Logged in successfully" 
-    print(session) 
-    # <SecureCookieSession {'csrf_token': 'd36f80594222731588967b204cd4b876d5e0df38', 'email': 'zahrafarrokhi2017@gamil.com', 'name': 'Zahra', 'user_id': 1}>  
-    if session.get('email') is not None:
-        return "You are already logged in"
+    # print(session) 
+    
     return render_template('admin/login.html', form=form)
