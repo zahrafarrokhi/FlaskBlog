@@ -21,9 +21,9 @@ def login():
         # id user in db 
         # <User 1>
         if not user:
-            return "Incorrent Credentials", 400
+            return "Incorrect Credentials", 400
         if not user.check_password(form.password.data):
-            return "Incorrent Credentials", 400
+            return "Incorrect Credentials", 400
         session['email'] = user.email
         session['user_id'] = user.id
         return "Logged in successfully" 
